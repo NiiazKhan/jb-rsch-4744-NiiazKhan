@@ -1,0 +1,18 @@
+[
+  {
+    "direction": "EAST",
+    "steps": 1
+  },
+  {
+    "direction": "NORTH",
+    "steps": 3
+  },
+  {
+    "direction": "WEST",
+    "steps": 1
+  },
+  {
+    "direction": "SOUTH",
+    "steps": 3
+  }
+]

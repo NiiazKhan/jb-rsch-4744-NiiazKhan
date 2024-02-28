@@ -1,0 +1,64 @@
+server:
+  port: 9092
+  error:
+    include-message: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "info,health,prometheus,refresh"
+  info:
+    git:
+      mode: full
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  application:
+    name: robot
+  threads:
+    virtual:
+      enabled: true
+  web:
+    resources:
+      add-mappings: false
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/postgres"
+    username: postgres
+    password: mysecretpassword
+    hikari:
+      connection-init-sql: SET SEARCH_PATH TO robot;
+      data-source-properties:
+        reWriteBatchedInserts: true
+  liquibase:
+    url: "jdbc:postgresql://localhost:5432/postgres"
+    user: postgres
+    password: mysecretpassword
+    change-log: /liquibase/changelog.xml
+    database-change-log-table: robot_databaseChangeLog
+    database-change-log-lock-table: robot_databaseChangeLogLock
+    parameters:
+      robot.schemaName: robot
+    liquibase-schema: public
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        order_inserts: true
+        order_updates: true
+        jdbc:
+          batch_size: 50
+          batch_versioned_data: true
+        default_batch_fetch_size: 50
+        batch_fetch_style: PADDED
+        format_sql: true
+        highlight_sql: true
